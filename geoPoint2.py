@@ -22,7 +22,7 @@ def pontoMedio(borda,centroid):
 gdf = gpd.read_file('C:/Users/Camila/Desktop/pivos/v2/PivosMatopibaMergedV2.shp')
 polygons = gdf.geometry
 
-points = pd.read_csv('dpv2_025.csv')
+points = pd.read_csv('amp_v2ok_060.csv')
 
 print(points)
 coords = [list(poly.exterior.coords) for poly in polygons]
@@ -30,7 +30,7 @@ coords = [list(poly.exterior.coords) for poly in polygons]
 with fiona.open('C:/Users/Camila/Desktop/pivos/v2/PivosMatopibaMergedV2.shp') as src:
     meta = src.meta
     meta['schema']['geometry'] = 'Point'
-    with fiona.open('outputdpv2_025.shp', 'w', **meta) as dst:
+    with fiona.open('output_amp_v2ok_060.shp', 'w', **meta) as dst:
         i=0
         for f in src:
             pm = Point(points["long"][i],points["lat"][i])

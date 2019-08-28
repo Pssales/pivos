@@ -7,38 +7,65 @@ import statistics
 import pandas as pd
 
 
-data = pd.read_csv('seriesv2.csv')
-coordenadas = pd.read_csv('output_coordenadas.csv')
+data = pd.read_csv('series_output_v2pivosmatopibaok.csv')
+coordenadas = pd.read_csv('output_coordenadas_v2pivosmatopibaok.csv')
 data = data/10000
 desvio= []
+amplitude= []
 
 for i in range(len(data['2017-12-03'])):
-    desvio.append(np.sqrt(data.loc[i].var()))
-
-data['desvio'] = desvio
-data['lat'] = coordenadas[' Lat']
-data['long'] = coordenadas['Long ']
-
-print(data['desvio'].mean())
+    desvio.append(data.loc[i].std())
+    amplitude.append(data.loc[i].max() - data.loc[i].min())
 
 # f,ax = plt.subplots(figsize = (10, 10))
 # sns.heatmap(data.corr(), annot = True, linewidths = .2, fmt = '.2f')
+# h=0
+# for i in range(len(data['2018-01-17'])):
+#     if(amplitude[i] > 0.50):
+#         plt.plot(data.loc[i])
+#         h+=1
 # plt.show()
 
-# for i in range(len(data['2017-02-02'])):
-#     if(desvio[i]<0.20):
+# print(h)
+
+
+# h=0
+# for i in range(len(data['2018-01-17'])):
+#     if(amplitude[i] > 0.60):
 #         plt.plot(data.loc[i])
-print(len(data['desvio']))
+#         h+=1
+# plt.show()
+# print(h)
 
-# teste = data[data['desvio']<0.33]
-# teste.to_csv('dpv2_033.csv', index=False)
-# print(len(teste))
+# h=0
+# for i in range(len(data['2018-01-17'])):
+#     if(amplitude[i] > 0.70):
+#         plt.plot(data.loc[i])
+#         h+=1
+# plt.show()
+# print(h)
 
-# teste = data[data['desvio']>0.16]
-# teste = teste[teste['desvio']<0.33]
-# print(len(teste))
-# teste.to_csv('dpv2_016_33.csv', index=False)
 
-teste = data[data['desvio']>0.25]
-teste.to_csv('dpv2_025.csv', index=False)
-print(len(teste))
+# for i in range(len(data['2018-01-17'])):
+#     if(desvio[i] > 0.20):
+#         plt.plot(data.loc[i])
+# plt.show()
+
+# for i in range(len(data['2018-01-17'])):
+#     if(desvio[i] > 0.22):
+#         plt.plot(data.loc[i])
+# plt.show()
+
+data['desvio'] = desvio
+data['amplitude'] = amplitude
+data['lat'] = coordenadas['Lat']
+data['long'] = coordenadas['Long']
+
+teste = data[data['amplitude']>0.60]
+teste.to_csv('amp_v2ok_060.csv', index=False)
+
+# teste = data[data['desvio']>0.20]
+# teste.to_csv('dpv2ok_020.csv', index=False)
+
+# teste = data[data['desvio']>0.22]
+# teste.to_csv('dpv2ok_022.csv', index=False)

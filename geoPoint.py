@@ -19,15 +19,15 @@ def pontoMedio(borda,centroid):
     pm = Point(xm(x),ym(y))
     return pm
 
-gdf = gpd.read_file('C:/Users/Camila/Desktop/pivos/v2/PivosMatopibaMergedV2.shp')
+gdf = gpd.read_file('v2pivosmatopibaok.shp')
 polygons = gdf.geometry
 
 coords = [list(poly.exterior.coords) for poly in polygons]
 
-with fiona.open('C:/Users/Camila/Desktop/pivos/v2/PivosMatopibaMergedV2.shp') as src:
+with fiona.open('v2pivosmatopibaok.shp') as src:
     meta = src.meta
     meta['schema']['geometry'] = 'Point'
-    with fiona.open('outputlatlongv2.shp', 'w', **meta) as dst:
+    with fiona.open('output_v2pivosmatopibaok.shp', 'w', **meta) as dst:
         i=0
         for f in src:
             pm = pontoMedio(coords[i][0],polygons[i].centroid)

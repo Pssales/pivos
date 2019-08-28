@@ -2,12 +2,12 @@ import fiona
 import geopandas as gpd
 import csv
 
-gdf = gpd.read_file('outputlatlongv2.shp')
+gdf = gpd.read_file('output_v2pivosmatopibaok.shp')
 polygons = gdf.geometry
 # print(polygons)
-newfile = open("output_coordenadas.csv", 'w+')
+newfile = open("output_coordenadas_v2pivosmatopibaok.csv", 'w+')
 output = []
-output.append("Long , Lat"+"\n")
+output.append("Long,Lat"+"\n")
 for polygon in polygons:
     output.append(str(polygon.centroid.x) + "," + str(polygon.centroid.y) + "\n")
 
