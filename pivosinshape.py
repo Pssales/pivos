@@ -1,12 +1,8 @@
 import geopandas as gpd
 import matplotlib.pyplot as plt
 
-ana = gpd.read_file("matopibashape.shp", encoding="utf-8")
-# detectados = gpd.read_file("output_v2pivosmatopibaok.shp", encoding="utf-8")
-# detectados = gpd.read_file("output_dpv2ok_017.shp", encoding="utf-8")
-# detectados = gpd.read_file("output_dpv2ok_020.shp", encoding="utf-8")
-detectados = gpd.read_file("output_dpv2ok_022.shp", encoding="utf-8")
-# detectados = gpd.read_file("output_amp_v2ok_060.shp", encoding="utf-8")
+ana = gpd.read_file("C:/Users/Camila/Desktop/pivos/ana/matopiba_maranhao.shp", encoding="utf-8")
+detectados = gpd.read_file("C:/Users/Camila/Desktop/pivos/detectados/detectados_maranhao.shp", encoding="utf-8")
 
 
 import pandas as pd

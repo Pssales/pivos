@@ -1,9 +1,9 @@
 library(wtss)
 server <- wtss::WTSS("http://www.esensing.dpi.inpe.br/wtss/")
 
-df <- read.csv(file = "C:/Users/Camila/Desktop/pivos/output_coordenadas_v2pivosmatopibaok.csv", header = TRUE, sep = ",")
+df <- read.csv(file = "C:/Users/Camila/Desktop/pivos/output_ana_matopiba_coordenadas.csv", header = TRUE, sep = ",")
 
-time_series <- wtss::timeSeries(server, coverages = "MOD13Q1", attributes=c("evi")
+time_series <- wtss::timeSeries(server, coverages = "MOD13Q1", attributes=c("nvdi")
                                 ,latitude=as.numeric(df[1,2]), longitude=as.numeric(df[1,1]), start_date="2017-11-01", end_date="2018-04-01")
 plot (time_series$MOD13Q1$attributes$evi)
 print(names(time_series$MOD13Q1$attributes$evi[0]))
@@ -16,13 +16,12 @@ print(time_series$MOD13Q1$attributes)
 lista <- list()
 
 for(i in 1:length(df[,1])){
-  time_series <- wtss::timeSeries(server, coverages = "MOD13Q1", attributes=c("evi"),
+  time_series <- wtss::timeSeries(server, coverages = "MOD13Q1", attributes=c("ndvi"),
                                   latitude=as.numeric(df[i,2]), longitude=as.numeric(df[i,1]), start_date="2017-11-01", end_date="2018-04-01")
-  plot (time_series$MOD13Q1$attributes$evi)
   lista[[i]] <- c(time_series$MOD13Q1$attributes)
 }
 print(lista)
 
 data <- data.frame(matrix(unlist(lista), nrow=length(lista), byrow=T))
 names(lista[[0]])
-write.csv(data,'C:/Users/Camila/Desktop/pivos/series_output_v2pivosmatopibaok.csv', row.names = FALSE)
+write.csv(data,'C:/Users/Camila/Desktop/pivos/serie_output_ana_matopiba_coordenadas.csv', row.names = FALSE)

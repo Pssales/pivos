@@ -7,8 +7,8 @@ import statistics
 import pandas as pd
 
 
-data = pd.read_csv('series_output_v2pivosmatopibaok.csv')
-coordenadas = pd.read_csv('output_coordenadas_v2pivosmatopibaok.csv')
+data = pd.read_csv('serie_output_ana_matopiba_coordenadas.csv')
+coordenadas = pd.read_csv('output_ana_matopiba_coordenadas.csv')
 data = data/10000
 desvio= []
 amplitude= []
@@ -58,11 +58,23 @@ for i in range(len(data['2017-12-03'])):
 
 data['desvio'] = desvio
 data['amplitude'] = amplitude
-data['lat'] = coordenadas['Lat']
-data['long'] = coordenadas['Long']
+print("Desvio:")
+print(data['desvio'].mean())
+print("Amplitude:")
+print(data['amplitude'].mean())
 
-teste = data[data['amplitude']>0.60]
-teste.to_csv('amp_v2ok_060.csv', index=False)
+print("Amplitde Minima")
+print(data['amplitude'].min())
+
+print("Amplitde Maxma")
+print(data['amplitude'].max())
+plt.plot(data['amplitude'])
+plt.show()
+# data['lat'] = coordenadas['Lat']
+# data['long'] = coordenadas['Long']
+
+# teste = data[data['amplitude']>0.60]
+# teste.to_csv('amp_v2ok_060.csv', index=False)
 
 # teste = data[data['desvio']>0.20]
 # teste.to_csv('dpv2ok_020.csv', index=False)
