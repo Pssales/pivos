@@ -19,18 +19,18 @@ def pontoMedio(borda,centroid):
     pm = Point(xm(x),ym(y))
     return pm
 
-gdf = gpd.read_file('ana_matopiba.shp')
+gdf = gpd.read_file('C:/Users/Camila/Desktop/LC8_SRgreenest_pivots_merged_polygon/LC8_SRgreenest_pivots_merged_polygon.shp')
 polygons = gdf.geometry
 
 coords = [list(poly.exterior.coords) for poly in polygons]
 
-with fiona.open('ana_matopiba.shp') as src:
+with fiona.open('C:/Users/Camila/Desktop/LC8_SRgreenest_pivots_merged_polygon/LC8_SRgreenest_pivots_merged_polygon.shp') as src:
     meta = src.meta
     meta['schema']['geometry'] = 'Point'
-    with fiona.open('output_ana_matopiba.shp', 'w', **meta) as dst:
+    with fiona.open('C:/Users/Camila/Desktop/LC8_SRgreenest_pivots_merged_polygon/output_LC8_SRgreenest_pivots_merged_polygon.shp', 'w', **meta) as dst:
         i=0
         for f in src:
-            pm = pontoMedio(coords[i][0],polygons[i].centroid)
+            pm = pontoMedio(coords[i][1],polygons[i].centroid)
             f['geometry'] = mapping(pm)
             dst.write(f)
             i += 1

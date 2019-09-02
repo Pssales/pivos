@@ -19,22 +19,21 @@ def pontoMedio(borda,centroid):
     pm = Point(xm(x),ym(y))
     return pm
 
-gdf = gpd.read_file('C:/Users/Camila/Desktop/pivos/v2/PivosMatopibaMergedV2.shp')
+gdf = gpd.read_file('C:/Users/Camila/Desktop/LC8_SRgreenest_pivots_merged_polygon/LC8_SRgreenest_pivots_merged_polygon.shp')
 polygons = gdf.geometry
 
-points = pd.read_csv('amp_v2ok_060.csv')
+arquivos = ["amp_max"]
 
-print(points)
-coords = [list(poly.exterior.coords) for poly in polygons]
-
-with fiona.open('C:/Users/Camila/Desktop/pivos/v2/PivosMatopibaMergedV2.shp') as src:
-    meta = src.meta
-    meta['schema']['geometry'] = 'Point'
-    with fiona.open('output_amp_v2ok_060.shp', 'w', **meta) as dst:
-        i=0
-        for f in src:
-            pm = Point(points["long"][i],points["lat"][i])
-            f['geometry'] = mapping(pm)
-            dst.write(f)
-            i += 1
-            print(i)
+for arquivo in arquivos:
+    points = pd.read_csv(arquivo+'.csv')
+    with fiona.open('C:/Users/Camila/Desktop/LC8_SRgreenest_pivots_merged_polygon/LC8_SRgreenest_pivots_merged_polygon.shp') as src:
+        meta = src.meta
+        meta['schema']['geometry'] = 'Point'
+        with fiona.open('C:/Users/Camila/Desktop/LC8_SRgreenest_pivots_merged_polygon/output_'+arquivo+'.shp', 'w', **meta) as dst:
+            i=0
+            for f in src:
+                pm = Point(points["long"][i],points["lat"][i])
+                f['geometry'] = mapping(pm)
+                dst.write(f)
+                i += 1
+                print(i)
